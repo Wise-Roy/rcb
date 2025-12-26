@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
+import { Linkedin, Instagram, Mail } from "lucide-react";
 
 interface BoardMember {
   id: number;
@@ -50,10 +52,10 @@ const boardMembers: BoardMember[] = [
   },
   {
     id: 5,
-    name: "Jayendra Shroff",
+    name: "Sujal Yadav",
     position: "Vice President",
     description: "Supporting Excellence",
-    image: "/Jayendra.jpeg",
+    image: "",
     gradient: "from-mauve-wine to-mauve-wine-dark",
     initial: "VP",
   },
@@ -131,52 +133,86 @@ const boardMembers: BoardMember[] = [
   },
 ];
 
-export default function Board() {
-  return (
-    <section id="board" className="py-16 px-6 lg:px-20 ">
-      <div className="flex flex-col items-center justify-center text-center mb-8">
-        <h3 className="text-2xl md:text-3xl font-bold text-mauve-wine mb-4">
-          Board of Directors - RIY 2025-2026
-        </h3>
-        <p className="text-mauve-wine-light">
-          Meet the dedicated leaders driving our mission forward
-        </p>
-      </div>
+export default function BoardMembers() {
+  const [hovered, setHovered] = useState<number | null>(null);
 
-      <div className="grid  md:grid-cols-2 grid-cols-1 gap-8">
-        {boardMembers.map((member) => (
-          <div
-            key={member.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden luxury-shadow hover:shadow-lg transition"
-          >
+  return (
+    <section id="board" className="py-20 luxury-gradient">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Board of Directors
+          </h2>
+
+          <p className="text-white max-w-2xl mx-auto">
+            Meet the passionate leaders driving our mission forward
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {boardMembers.map((member) => (
             <div
-              className={`h-[500px] bg-gradient-to-br ${member.gradient} relative`}
+              key={member.id}
+              className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer bg-mauve-wine border border-mauve-wine"
+              onMouseEnter={() => setHovered(member.id)}
+              onMouseLeave={() => setHovered(null)}
             >
-              {member.image ? (
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-2xl font-bold">
+              {/* Image / Placeholder */}
+              <div className="aspect-square">
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt={member.name}
+                  />
+                ) : (
+                  <div
+                    className={`w-full h-full flex items-center justify-center text-4xl font-bold text-white bg-gradient-to-br ${member.gradient}`}
+                  >
                     {member.initial}
-                  </span>
-                </div>
-              )}
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-3 text-center">
-                <div className="text-white font-bold">{member.name}</div>
-                <div className="text-rose-tan-light text-sm">
+                  </div>
+                )}
+              </div>
+
+              {/* Hover Overlay */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-t from-mauve-wine-dark/90 via-mauve-wine/80 to-transparent text-white p-6 flex flex-col justify-end transition-all duration-300 ${
+                  hovered === member.id ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <h3 className="text-xl font-bold text-luxury-gold">
+                  {member.name}
+                </h3>
+                <p className="text-rose-tan-light text-sm mb-3">
                   {member.position}
+                </p>
+                <p className="text-sm opacity-90 mb-4">{member.description}</p>
+
+                <div className="flex gap-3">
+                  <button className="w-9 h-9 bg-white/10 hover:bg-luxury-gold rounded-full flex items-center justify-center transition">
+                    <Linkedin className="w-4 h-4" />
+                  </button>
+                  <button className="w-9 h-9 bg-white/10 hover:bg-luxury-gold rounded-full flex items-center justify-center transition">
+                    <Instagram className="w-4 h-4 " />
+                  </button>
+                  <button className="w-9 h-9 bg-white/10 hover:luxury-gold rounded-full flex items-center justify-center transition">
+                    <Mail className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
+
+              {/* Default text (when NOT hovered) */}
+              <div
+                className={`p-5 text-center transition-all duration-300 ${
+                  hovered === member.id ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                <h3 className="font-bold text-white">{member.name}</h3>
+                <p className="text-sm text-white">{member.position}</p>
+              </div>
             </div>
-            <div className="p-4 text-center text-sm text-gray-600">
-              {member.description}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
