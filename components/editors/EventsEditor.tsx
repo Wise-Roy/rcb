@@ -12,9 +12,9 @@ export interface IEvent {
   description: string;
 }
 
-export default function EventsEditor({ initialData }: { initialData: IEvent[] }) {
+export default function EventsEditor() {
   const { showToast } = useToast();
-  const [events, setEvents] = useState<IEvent[]>(initialData || []);
+  const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState<{ message: string; type: "success" | "error" } | null>(null);
 

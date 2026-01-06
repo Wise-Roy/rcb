@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface HeroData {
   backgroundImage: string;
@@ -10,6 +10,7 @@ interface HeroData {
 }
 
 export default function HeroEditor() {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);;
   const [hero, setHero] = useState<HeroData>({
     backgroundImage: "",
     title: "",
@@ -96,10 +97,28 @@ export default function HeroEditor() {
       {/* Image Upload */}
       <div className="mb-4">
         <label className="block mb-2 font-medium">Background Image</label>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="bg-rose-tan text-white px-4 py-2 rounded-lg font-medium hover:bg-rose-tan-dark transition-colors text-sm"
+        >
+          Upload Image
+        </button>
         {hero.backgroundImage && !file && (
           <div className="mt-3">
-            <img src={hero.backgroundImage} alt="Preview" width={120} height={80} className="rounded-lg" />
+            <img
+              src={hero.backgroundImage}
+              alt="Preview"
+              width={120}
+              height={80}
+              className="rounded-lg"
+            />
           </div>
         )}
         {file && (
@@ -133,7 +152,10 @@ export default function HeroEditor() {
         </div>
       ))}
 
-      <button onClick={saveHero} className="bg-rose-tan text-white px-6 py-3 rounded-lg">
+      <button
+        onClick={saveHero}
+        className="bg-rose-tan text-white px-6 py-3 rounded-lg"
+      >
         Save Hero
       </button>
     </div>

@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Instagram,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import { MdEmail } from "react-icons/md";
 
 export default function Footer() {
@@ -85,9 +80,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-mauve-wine mt-12 pt-8 text-center">
+        <div className="border-t border-mauve-wine mt-12 pt-8 text-center gap-1.5">
           <p className="text-[#d1c2a2]">
             &copy; 2025 Rotaract Club of Bibwewadi Pune. All Rights Reserved.
+          </p>
+          <p className="text-[#d1c2a2]">
+            Designed and Developed by{" "}
+            <a
+              href="mailto:rotaractclubofbibwewadi@gmail.com"
+              className="underline"
+            >
+              USP FACE
+            </a>
+            
           </p>
         </div>
       </div>
