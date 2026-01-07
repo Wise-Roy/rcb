@@ -23,7 +23,9 @@ export async function GET() {
   }
 
   return NextResponse.json(data, { status: 200 });
-}// ==========================
+}
+
+// ==========================
 // POST - Add member(s)
 // ==========================
 export async function POST(req: Request) {
@@ -45,7 +47,6 @@ export async function POST(req: Request) {
 
   return NextResponse.json(data);
 }
-
 
 // ==========================
 // DELETE - Remove by ID

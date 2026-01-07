@@ -11,6 +11,7 @@ import EventsEditor from "@/components/editors/EventsEditor";
 import { useToast } from "@/components/ui/ToastProvider";
 import BoardMembersEditor from "@/components/editors/BoardEditor";
 import ProjectsEditor from "@/components/editors/ProjectsEditor";
+import QuickEditor from "@/components/editors/QuickEditor";
 
 export default function AdminPage() {
   const { showToast } = useToast();
@@ -138,6 +139,7 @@ export default function AdminPage() {
                     "board",
                     "projects",
                     "events",
+                    "quick"
                   ].map((sec) => (
                     <li key={sec}>
                       <button
@@ -157,7 +159,9 @@ export default function AdminPage() {
                           ? "Projects"
                           : sec === "events"
                           ? "Events"
-                          :""}
+                          : sec === "quick"
+                          ? "Quick Section"
+                          : ""}
                       </button>
                     </li>
                   ))}
@@ -189,6 +193,8 @@ export default function AdminPage() {
                 {section === "projects" && <ProjectsEditor />}
 
                 {section === "events" && <EventsEditor />}
+
+                {section === "quick" && <QuickEditor />}
               </div>
             </main>
           </div>
