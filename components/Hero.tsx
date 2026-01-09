@@ -54,6 +54,27 @@ export default function Hero() {
     fetchHero();
   }, []);
 
+  useEffect(() => {
+    const cached = localStorage.getItem("hero");
+
+    if (cached) {
+      setHero(JSON.parse(cached));
+    }
+
+    const fetchHero = async () => {
+      const res = await fetch("/api/hero");
+      const data = await res.json();
+
+      if (res.ok) {
+        setHero(data);
+        localStorage.setItem("hero", JSON.stringify(data));
+      }
+    };
+
+    fetchHero();
+  }, []);
+  
+
   return (
     <section
       id="home"

@@ -102,6 +102,12 @@ export default function Navbar() {
         <div className="md:hidden pb-4 px-4">
           <div className="flex flex-col space-y-2">
             <Link
+              href="/quick"
+              className="text-mauve-wine hover:text-rose-tan font-medium py-2"
+            >
+              Quick
+            </Link>
+            <Link
               href="#home"
               className="text-mauve-wine hover:text-rose-tan font-medium py-2"
             >
