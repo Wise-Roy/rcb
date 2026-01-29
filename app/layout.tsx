@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/ToastProvider";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,6 +16,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Rotaract Club of Bibwewadi Pune",
   description: "From solos to symphony",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "none",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +37,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-luxury-cream`}
       >
-        <main><ToastProvider>{children}</ToastProvider></main>
+        <main>
+          <ToastProvider>{children}</ToastProvider>
+        </main>
       </body>
     </html>
   );
